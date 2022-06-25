@@ -119,3 +119,4 @@ class ContactDetails
             . "Email Id : " . $this->email . "\n";
     }
 }
+?>
