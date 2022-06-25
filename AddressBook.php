@@ -37,44 +37,44 @@ class Contact
         } else {
             $input = readline("Please enter the first name of the person to edit contact :");
             for ($i = 0; $i < count($this->contactArray); $i++) {
-                $name = $this->contactArray[$i];
-                if ($input == $name->getFirstName()) {
+                $this->person = $this->contactArray[$i];
+                if ($input == $this->person->getFirstName()) {
                     echo "contact found with $input \n";
                     $options = readline("please select from the below options to edit the details\n1. firstName 2. lastName 3. address 4. city 5. state 6. zip 7. phoneNumber");
                     switch ($options) {
                         case 1:
                             $newName = readline("please enter the new fistName ");
-                            $name->setFirstName($newName);
+                            $this->person->setFirstName($newName);
                             echo "contact edited successfully\n";
                             break;
                         case 2:
                             $newName = readline("please enter the new lastName ");
-                            $name->setLastName($newName);
+                            $this->person->setLastName($newName);
                             echo "contact edited successfully\n";
                             break;
                         case 3:
                             $newName = readline("please enter the new address ");
-                            $name->setAddress($newName);
+                            $this->person->setAddress($newName);
                             echo "contact edited successfully\n";
                             break;
                         case 4:
                             $newName = readline("please enter the new City ");
-                            $name->setCity($newName);
+                            $this->person->setCity($newName);
                             echo "contact edited successfully\n";
                             break;
                         case 5:
                             $newName = readline("please enter the new state ");
-                            $name->setState($newName);
+                            $this->person->setState($newName);
                             echo "contact edited successfully\n";
                             break;
                         case 6:
                             $newName = readline("please enter the new zip ");
-                            $name->setZip($newName);
+                            $this->person->setZip($newName);
                             echo "contact edited successfully\n";
                             break;
                         case 7:
-                            $number = readline("please enter the new phoneNumber " );
-                            $name->setPhoneNumber($number);
+                            $number = readline("please enter the new phoneNumber ");
+                            $this->person->setPhoneNumber($number);
                             echo "contact edited successfully\n";
                             break;
                         default:
@@ -93,7 +93,7 @@ class Contact
      */
     function printContact()
     {
-        echo "===============printing contacts ==================";
+        echo "===============printing contacts ==================\n";
         if (empty($this->contactArray)) {
             echo "No contacts found in record";
         } else {
@@ -108,10 +108,33 @@ class Contact
             }
         }
     }
+
+    /**
+     * function to check if contact list is empty and print contact list
+     */
+
+    function deleteContact()
+    {
+        if (empty($this->contactArray)) {
+            echo "No contacts found to edit";
+        } else {
+            $input = readline("Please enter the first name of the person to delete contact :");
+            for ($i = 0; $i < count($this->contactArray); $i++) {
+                $this->person = $this->contactArray[$i];
+                if ($input == $this->person->getFirstName()) {
+                    echo "contact found with $input \n";
+                    unset($this->contactArray[$i]);                     //removing contact from array
+                    echo "Contact deleted successfully!!\n ";
+                }
+                $this->printContact();
+            }
+        }
+    }
 }
 //calling functions
 $contact = new Contact($firstName, $lastName, $address, $city, $state, $zip, $phoneNumber, $email);
 $contact->welcomeMsg();
 $contact->createContacts();
 $contact->printContact();
-$contact->editContact();
+//$contact->editContact();
+$contact->deleteContact();
