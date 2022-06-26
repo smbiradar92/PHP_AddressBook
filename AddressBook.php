@@ -11,7 +11,9 @@ class Contact
         echo "Welcome to addressbook program \n";
     }
 
-    //UC1_create contacts by taking input from user
+    /**  
+     * UC1_create contacts by taking input from user
+    */
     function createContacts()
     {
         $this->firstName = readline("Please enter the firstName : ");
@@ -28,7 +30,9 @@ class Contact
     }
 
     /**
-     * fuction to edit contact with user input
+     * fuction to edit contact with user input. first check if the list is empty then check for 
+     * user input matches firstName and then from the switch case options select the option to 
+     * edit the contact detail to edit
      */
     public function editContact()
     {
@@ -80,7 +84,6 @@ class Contact
                         default:
                             echo "Invalid input!!!\n please select only from given inputs\n";
                     }
-                    $this->printContact();
                 } else {
                     echo "contact not found with the input name";
                 }
@@ -98,19 +101,20 @@ class Contact
             echo "No contacts found in record";
         } else {
             for ($i = 1; $i <= count($this->contactArray); $i++) {
-                echo "\nContactDetails $i : \nName : " . $this->firstName . " " . $this->lastName . "\n"
-                    . "Address : " . $this->address . "\n"
-                    . "City : " . $this->city . "\n"
-                    . "State : " . $this->state . "\n"
-                    . "ZipCode : " . $this->zip . "\n"
-                    . "Phone Number : " . $this->phoneNumber . "\n"
-                    . "Email Id : " . $this->email . "\n";
+                echo "\nContactDetails$i : \nName => " . $this->firstName . " " . $this->lastName . "\n"
+                    . "Address => " . $this->address . "\n"
+                    . "City => " . $this->city . "\n"
+                    . "State => " . $this->state . "\n"
+                    . "ZipCode => " . $this->zip . "\n"
+                    . "Phone Number => " . $this->phoneNumber . "\n"
+                    . "Email Id => " . $this->email . "\n";
             }
         }
     }
 
     /**
-     * function to check if contact list is empty and print contact list
+     * function to check if contact list is empty,check if user entered input matches firstName in list 
+     * and then delete contact list using for loop.
      */
 
     function deleteContact()
@@ -126,15 +130,7 @@ class Contact
                     unset($this->contactArray[$i]);                     //removing contact from array
                     echo "Contact deleted successfully!!\n ";
                 }
-                $this->printContact();
             }
         }
     }
 }
-//calling functions
-$contact = new Contact($firstName, $lastName, $address, $city, $state, $zip, $phoneNumber, $email);
-$contact->welcomeMsg();
-$contact->createContacts();
-$contact->printContact();
-//$contact->editContact();
-$contact->deleteContact();
